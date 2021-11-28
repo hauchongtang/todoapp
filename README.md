@@ -2,6 +2,14 @@
 
 Basic To Do App (Android Only)
 
+# Features
+- Add a task as a tab
+- Add a description for the task
+- Add checklists to the task
+- check the checklist
+- delete the tab
+- delete/undo delete for individual checklist
+
 # Installation and Testing
 
 ## Getting Started

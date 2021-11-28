@@ -272,7 +272,7 @@ class _TasksState extends State<Tasks> {
           // DELETE BUTTON
           visible: _contentVisible!,
           child: Positioned(
-            bottom: 24.0,
+            bottom: 72.0,
             right: 24.0,
             child: GestureDetector(
               onTap: () async {

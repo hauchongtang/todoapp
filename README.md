@@ -3,7 +3,6 @@
 Basic To Do App (Android Only)
 
 # Installation and Testing
-- [apk link](https://drive.google.com/file/d/1C3faEjM8PxM5VD9SWYz6-z-b4Eahzc_r/view?usp=sharing)
 
 ## Getting Started
 

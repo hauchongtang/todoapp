@@ -59,6 +59,11 @@ class DataBaseImpl {
     await _db.rawDelete("DELETE FROM todoTable WHERE taskId = '$id'");
   }
 
+  Future<void> deleteCheckListItem(int? id) async {
+    Database _db = await database();
+    await _db.rawDelete("DELETE FROM todoTable WHERE id = '$id'");
+  }
+
   Future<List<TaskModel>> getTasks() async {
     Database _db = await database();
     List<Map<String, dynamic>> taskMap = await _db.query("taskTable");

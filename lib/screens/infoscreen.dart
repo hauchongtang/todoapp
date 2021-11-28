@@ -34,33 +34,6 @@ class InfoPage extends StatelessWidget {
                   ],
                 ),
               ),
-              Positioned(
-                bottom: 24.0,
-                right: 0.0,
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Homepage())
-                    );
-                  },
-                  child: Container(
-                    height: 60.0,
-                    width: 60.0,
-                    decoration: BoxDecoration(
-                        color: Colors.greenAccent,
-                        borderRadius: BorderRadius.circular(30)
-                    ),
-                    child: Image(
-                      height: 48.0,
-                      width: 48.0,
-                      image: AssetImage(
-                          "assets/back_arrow_icon.png"
-                      ),
-                    ),
-                  ),
-                ),
-              )
             ],
           ),
         )

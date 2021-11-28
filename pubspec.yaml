@@ -39,6 +39,7 @@ dependencies:
   sqflite:
   path:
   link_text: ^0.2.0
+  focused_menu: ^1.0.5
 
 
 dev_dependencies:

@@ -103,3 +103,21 @@ class CheckListWidget extends StatelessWidget {
     );
   }
 }
+
+class DeleteUndoBar extends StatelessWidget {
+  const DeleteUndoBar({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: SnackBar(
+        content: Text("Task Deleted"),
+        action: SnackBarAction(
+          label: "Undo",
+          onPressed: () {},
+        ),
+      ),
+    );
+  }
+}
+

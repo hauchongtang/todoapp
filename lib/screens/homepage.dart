@@ -33,6 +33,10 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("To Do"),
+        backgroundColor: Colors.indigoAccent,
+      ),
       body: pages[_selectedIdx],
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.indigoAccent,

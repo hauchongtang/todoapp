@@ -47,6 +47,48 @@ class _TasksState extends State<Tasks> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.indigoAccent,
+        actions: [
+          IconButton(
+            onPressed: () async {
+              if (_taskId != 0) {
+                // await _dbHelper.deleteTask(_taskId);
+                // Navigator.pop(context);
+                showDialog(
+                  context: context,
+                  builder: (BuildContext ctx) {
+                    return AlertDialog(
+                      title: const Text("Please confirm"),
+                      content: const Text("Do you want to remove the Task?"),
+                      actions: [
+                        TextButton(
+                            onPressed: () async {
+                              await _dbHelper.deleteTask(_taskId);
+                              Navigator.of(context).pop();
+                              Navigator.of(context).pop();
+                              setState(() {});
+                            },
+                            child: const Text("Yes")
+                        ),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text("No")
+                        ),
+                      ],
+                    );
+                  }
+                );
+              }
+            },
+            icon: const Icon(
+              Icons.delete_rounded,
+            )
+          )
+        ],
+      ),
         body: SafeArea(
             child: Container(
                 child: Stack(
@@ -60,59 +102,51 @@ class _TasksState extends State<Tasks> {
               ),
               child: Row(
                 children: [
-                  InkWell(
-                    // ENTER TASK
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(24.0),
-                      child: Image(
-                          image: AssetImage(
-                        "assets/back_arrow_icon.png",
-                      )),
-                    ),
-                  ),
                   Expanded(
-                    child: TextField(
-                      // ENTER TASK MAIN FIELD
-                      focusNode: _titleFocus,
-                      onSubmitted: (value) async {
-                        print("Field value: $value");
-
-                        if (value.isNotEmpty) {
-                          if (widget.task == null) {
-                            DataBaseImpl _dbHelper = DataBaseImpl();
-                            TaskModel _newTask = TaskModel(title: value);
-                            _taskId = await _dbHelper.insertTask(_newTask);
-                            setState(() {
-                              _contentVisible = true;
-                              _taskTitle = value;
-                            });
-                            print("Created! id: $_taskId");
-                          } else {
-                            // TaskModel _newTask = TaskModel(title: value);
-                            await _dbHelper.updateTaskTitle(_taskId, value);
-
-                            setState(() {
-                              _contentVisible = true;
-                              _taskTitle = value;
-                            });
-                            print("Update existing task");
-                          }
-
-                          // focus to desc field
-                          _descFocus.requestFocus();
-                        }
-                      },
-                      controller: TextEditingController()..text = _taskTitle!,
-                      decoration: InputDecoration(
-                        hintText: "Enter Task Title",
-                        border: InputBorder.none,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 24.0
                       ),
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
+                      child: TextField(
+                        // ENTER TASK MAIN FIELD
+                        focusNode: _titleFocus,
+                        onSubmitted: (value) async {
+                          print("Field value: $value");
+
+                          if (value.isNotEmpty) {
+                            if (widget.task == null && _taskId == 0) {
+                              DataBaseImpl _dbHelper = DataBaseImpl();
+                              TaskModel _newTask = TaskModel(title: value);
+                              _taskId = await _dbHelper.insertTask(_newTask);
+                              setState(() {
+                                _contentVisible = true;
+                                _taskTitle = value;
+                              });
+                              print("Created! id: $_taskId");
+                            } else {
+                              // TaskModel _newTask = TaskModel(title: value);
+                              await _dbHelper.updateTaskTitle(_taskId, value);
+
+                              setState(() {
+                                _contentVisible = true;
+                                _taskTitle = value;
+                              });
+                              print("Update existing task");
+                            }
+
+                            // focus to desc field
+                            _descFocus.requestFocus();
+                          }
+                        },
+                        controller: TextEditingController()..text = _taskTitle!,
+                        decoration: InputDecoration(
+                          hintText: "Enter Task Title",
+                          border: InputBorder.none,
+                        ),
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   )
@@ -182,21 +216,59 @@ class _TasksState extends State<Tasks> {
                             },
                             onLongPress: () async {
                               tempStore = checkList[index];
-                              await _dbHelper
-                                  .deleteCheckListItem(checkList[index].id);
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(
-                                  SnackBar(
-                                    content: Text("Task Deleted"),
-                                    action: SnackBarAction(
-                                      label: "Undo",
-                                      onPressed: () async {
-                                        _dbHelper.insertTodo(tempStore!);
-                                        tempStore = null;
-                                        setState(() {});
-                                      },
-                                    ),
-                                  )
+                              // await _dbHelper
+                              //     .deleteCheckListItem(checkList[index].id);
+                              // ScaffoldMessenger.of(context)
+                              //     .showSnackBar(
+                              //     SnackBar(
+                              //       content: Text("Task Deleted"),
+                              //       action: SnackBarAction(
+                              //         label: "Undo",
+                              //         onPressed: () async {
+                              //           _dbHelper.insertTodo(tempStore!);
+                              //           tempStore = null;
+                              //           setState(() {});
+                              //         },
+                              //       ),
+                              //     )
+                              // );
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext ctx) {
+                                    return AlertDialog(
+                                      title: const Text("Please confirm"),
+                                      content: const Text("Remove check list?"),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () async {
+                                              await _dbHelper.deleteCheckListItem(checkList[index].id);
+                                              Navigator.of(context).pop();
+                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                SnackBar(
+                                                  content: Text("Task Deleted"),
+                                                  action: SnackBarAction(
+                                                    label: "Undo",
+                                                    onPressed: () async {
+                                                      _dbHelper.insertTodo(tempStore!);
+                                                      tempStore = null;
+                                                      setState(() {});
+                                                    },
+                                                  ),
+                                                )
+                                              );
+                                              setState(() {});
+                                            },
+                                            child: const Text("Yes")
+                                        ),
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: const Text("No")
+                                        ),
+                                      ],
+                                    );
+                                  }
                               );
                               setState(() {});
                             },
@@ -268,32 +340,6 @@ class _TasksState extends State<Tasks> {
             ),
           ],
         ),
-        Visibility(
-          // DELETE BUTTON
-          visible: _contentVisible!,
-          child: Positioned(
-            bottom: 72.0,
-            right: 24.0,
-            child: GestureDetector(
-              onTap: () async {
-                if (_taskId != 0) {
-                  await _dbHelper.deleteTask(_taskId);
-                  Navigator.pop(context);
-                }
-              },
-              child: Container(
-                height: 60.0,
-                width: 60.0,
-                decoration: BoxDecoration(
-                    color: Colors.pink,
-                    borderRadius: BorderRadius.circular(30.0)),
-                child: Image(
-                  image: AssetImage("assets/delete_icon.png"),
-                ),
-              ),
-            ),
-          ),
-        )
       ],
     ))));
   }

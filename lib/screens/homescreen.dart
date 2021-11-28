@@ -24,25 +24,13 @@ class _HomeState extends State<Home> {
             width: double.infinity,
             padding: EdgeInsets.symmetric(
               horizontal: 24.0,
+              vertical: 24.0
             ),
             child: Stack(
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      margin: EdgeInsets.only(
-                        top: 32.0,
-                        bottom: 32.0,
-                      ),
-                      child: Image(
-                        image: AssetImage(
-                          'assets/icons8-exam-96.png',
-                        ),
-                        height: 64,
-                        width: 64,
-                      ),
-                    ),
                     Expanded(
                         child: FutureBuilder(
                           initialData: List<TaskModel>.empty(),

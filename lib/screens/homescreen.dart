@@ -4,7 +4,6 @@ import 'package:todoapp/screens/tasks.dart';
 
 import '../database_impl.dart';
 import '../widgets.dart';
-import 'infoscreen.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -22,7 +21,7 @@ class _HomeState extends State<Home> {
           child: Container(
             color: Colors.indigoAccent,
             width: double.infinity,
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 24.0,
               vertical: 24.0
             ),

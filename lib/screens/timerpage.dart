@@ -1,7 +1,4 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 import 'package:todoapp/database_impl.dart';
 import 'package:todoapp/widgets.dart';
 import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';

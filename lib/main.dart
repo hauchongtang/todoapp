@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:todoapp/screens/homepage.dart';
 import 'package:todoapp/screens/splash.dart';
 
 void main() {
@@ -11,7 +10,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
     );

@@ -68,7 +68,7 @@ class _HomeState extends State<Home> {
                   ],
                 ),
                 Positioned(
-                  bottom: 24.0,
+                  bottom: 8.0,
                   right: 0.0,
                   child: GestureDetector(
                     onTap: () {

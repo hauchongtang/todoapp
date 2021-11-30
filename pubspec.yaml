@@ -40,6 +40,7 @@ dependencies:
   path:
   link_text: ^0.2.0
   focused_menu: ^1.0.5
+  flutter_ringtone_player: ^3.1.1 
 
 
 dev_dependencies:

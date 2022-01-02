@@ -9,7 +9,7 @@ Basic To Do App (Android Only)
 - check the checklist
 - delete the tab
 - delete/undo delete for individual checklist
-- Self timer (Pomodoro)
+- timer
 
 # Installation and Testing
 
